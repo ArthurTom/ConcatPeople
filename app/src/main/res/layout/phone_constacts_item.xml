@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+    <!-- 每个字母Group 的开头，标题的tittle-->
+    <TextView
+        android:id="@+id/catalog"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/holo_blue_light"
+        android:clickable="false"
+        android:enabled="false"
+        android:paddingBottom="5dip"
+        android:paddingLeft="5dip"
+        android:paddingTop="5dip"
+        android:textColor="#454545" />
+
+    <LinearLayout
+        android:id="@+id/ll_constact"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <!-- 头像-->
+        <com.eway.concatpeople.ImageTextView
+            android:id="@+id/icon"
+            android:layout_width="45dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dip"
+            android:text="find" />
+        <!-- 具体的tittle-->
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#336598"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>
