@@ -136,6 +136,12 @@ public class MainActivity extends Activity {
             PermissionUtil.getPersimmions(MainActivity.this, Manifest.permission.WRITE_CONTACTS, Manifest.permission.READ_CONTACTS,
                     Manifest.permission.GET_ACCOUNTS);
             callRecords = ConstactUtil.getAllCallRecords(MainActivity.this); // 获取手机上所有人的联系目录
+//            Map<String, String> map = new HashMap<>();
+//            map.put("阿毛", "11111");
+//            map.put("逼哥", "222222");
+//            map.put("cadaver", "333333");
+//            map.put("四个", "444444");
+//            callRecords = map;
             result = 1;
             return result;
         }
@@ -171,18 +177,11 @@ public class MainActivity extends Activity {
 
                         int a = adapter.getSectionForPosition(firstVisibleItem);
                         sideBar.update(a);
-                        /*============*/
+
 
 
                         /*----------*/
                         int section = adapter.getSectionForPosition(firstVisibleItem);  // 第一个位置位置的字母a
-
-//                        int nextGroupPosition = -1;  // 下一个组字母要显示的位置
-//                        do {
-//                            nextGroupPosition = adapter.getPositionForSection(section++);
-//
-//                        } while (nextGroupPosition == -1);
-//
 
                         int nextGroupPosition = -1;  // 下一个组字母要显示的位置
 
@@ -307,21 +306,21 @@ public class MainActivity extends Activity {
     /**
      * 根据输入框中的值来过滤数据并更新ListView
      *
-     * @param filterStr
+     * @param filterStr  搜索的字符串
      */
     private void filterData(String filterStr) {
-        List<SortModel> filterDateList = new ArrayList<SortModel>();
+        List<SortModel> filterDateList = new ArrayList<SortModel>();  // 存放要搜索的字符串
 
         if (TextUtils.isEmpty(filterStr)) {
-            filterDateList = SourceDateList;
+            filterDateList = SourceDateList;              //  如果，搜索的字符串是空的，就填充全部的内容
         } else {
-            filterDateList.clear();
-            for (SortModel sortModel : SourceDateList) {
-                String name = sortModel.getName();
-                if (name.indexOf(filterStr.toString()) != -1
+            filterDateList.clear();                      // 如果搜索的不为空，先删除以前的数据
+            for (SortModel sortModel : SourceDateList) {   // 循环的遍历所有的数据
+                String name = sortModel.getName();            // 得到每一个数据的名称
+                if (name.indexOf(filterStr.toString()) != -1          // 在名字中查找输入内容字符串出现的位置，
                         || characterParser.getSelling(name).startsWith(
-                        filterStr.toString())) {
-                    filterDateList.add(sortModel);
+                        filterStr.toString())) {     // 字符串的开头和搜索的内容的字符串的字母开头相同
+                    filterDateList.add(sortModel);  // 符合条件的设计进更新的list中
                 }
             }
         }
