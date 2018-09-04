@@ -55,6 +55,11 @@ public class MainActivity extends Activity {
     private LinearLayout titlelayout;
     private TextView titleTextView;
 
+
+//    private    int section;
+//
+//    int nextGroupPosition = -1;  // 下一个组字母要显示的位置
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -182,14 +187,18 @@ public class MainActivity extends Activity {
 
                         /*----------*/
                         int section = adapter.getSectionForPosition(firstVisibleItem);  // 第一个位置位置的字母a
-
+//
                         int nextGroupPosition = -1;  // 下一个组字母要显示的位置
 
-                        do {
-                            section++;
-                            nextGroupPosition = adapter.getPositionForSection(section);
-                        } while (nextGroupPosition == -1);
+                        if (adapter.list != null && adapter.list.size() > 0 && section < adapter.getSectionForPosition(adapter.list.size() - 1)) {
 
+                            do {
+
+                                nextGroupPosition = adapter.getPositionForSection(++section);
+                            } while (nextGroupPosition == -1);
+
+                        }
+                        Log.d("zwk", "" + nextGroupPosition);
 
                         if (firstVisibleItem != lsatFirstVisibleItem) {  // 上拉的时候，会相同
                             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) titlelayout.getLayoutParams();
@@ -198,7 +207,18 @@ public class MainActivity extends Activity {
                             Log.d("zwk", "hasHave的值为" + nextGroupPosition);
                             // 第一个位置特俗，上面所有的方法获取的，都是下下个字母的位置，而我们要显示下个字母的值，只需要下下个字母的位置-1，
                             // 就是上个字母的最后一个item的位置，获取其字母值也是一样的
-                            titleTextView.setText((char) adapter.getSectionForPosition(nextGroupPosition - 1) + "");
+//                            if (nextGroupPosition!=-1){
+//                                titleTextView.setText((char) adapter.getSectionForPosition(nextGroupPosition - 1) + "");
+//                            }else {
+//                                titleTextView.setText((char) adapter.getSectionForPosition(section ) + "");
+//                            }
+                            if (nextGroupPosition != -1) {
+                                titleTextView.setText((char) adapter.getSectionForPosition(nextGroupPosition - 1) + "");
+                            } else if (adapter.list.size() > 0 && nextGroupPosition == -1) {
+                                titleTextView.setText(((char) adapter.getSectionForPosition(adapter.list.size() - 1)+""));
+                            }
+
+
                         }
 
 
@@ -306,7 +326,7 @@ public class MainActivity extends Activity {
     /**
      * 根据输入框中的值来过滤数据并更新ListView
      *
-     * @param filterStr  搜索的字符串
+     * @param filterStr 搜索的字符串
      */
     private void filterData(String filterStr) {
         List<SortModel> filterDateList = new ArrayList<SortModel>();  // 存放要搜索的字符串

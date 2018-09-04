@@ -18,7 +18,7 @@ import com.eway.concatpeople.sortlist.SortModel;
  * @author http://blog.csdn.net/finddreams
  */ 
 public class SortAdapter extends BaseAdapter implements SectionIndexer{
-	private List<SortModel> list = null;
+	public List<SortModel> list = null;
 	private Context mContext;
 	
 	public SortAdapter(Context mContext, List<SortModel> list) {
